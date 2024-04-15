@@ -3,6 +3,5 @@
         <item quantity="other">%d שניות</item>
         <item quantity="one">שנייה אחת (%d)</item>
         <item quantity="two">%d שניות</item>
-        <item quantity="many">%d שניות</item>
     </plurals>
 </resources>

@@ -2,5 +2,6 @@
     <plurals name="quick_seek_x_second">
         <item quantity="other">%d segundos</item>
         <item quantity="one">%d segundo</item>
+        <item quantity="many">%d segundos</item>
     </plurals>
 </resources>
