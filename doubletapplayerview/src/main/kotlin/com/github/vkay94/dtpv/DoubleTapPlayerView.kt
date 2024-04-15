@@ -45,7 +45,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
 
     /**
      * If this field is set to `true` this view will handle double tapping, otherwise it will
-     * handle touches the same way as the original [PlayerView][com.google.android.exoplayer2.ui.PlayerView] does
+     * handle touches the same way as the original [com.google.android.exoplayer2.ui.PlayerView] does
      */
     var isDoubleTapEnabled = true
 
@@ -63,7 +63,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
     /**
      * Sets the [PlayerDoubleTapListener] which handles the gesture callbacks.
      *
-     * Primarily used for [YouTubeOverlay][com.github.vkay94.dtpv.youtube.YouTubeOverlay]
+     * Primarily used for [com.github.vkay94.dtpv.youtube.YouTubeOverlay]
      */
     fun controller(controller: PlayerDoubleTapListener) = apply { this.controller = controller }
 
@@ -107,7 +107,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
         // If the PlayerView is set by XML then call the corresponding setter method
         if (controllerRef != -1) {
             try {
-                val view = (this.parent as View).findViewById(controllerRef) as View
+                val view: View = (this.parent as View).findViewById(controllerRef)
                 if (view is PlayerDoubleTapListener) {
                     controller(view)
                 }
@@ -121,10 +121,11 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
     }
 
     /**
-     * Gesture Listener for double tapping
+     * Gesture Listener для двойных нажатий
      *
      * For more information which methods are called in certain situations look for
-     * [GestureDetector.onTouchEvent][android.view.GestureDetector.onTouchEvent],
+     * [GestureDetector.onTouchEvent]
+     * [android.view.GestureDetector.onTouchEvent],
      * especially for ACTION_DOWN and ACTION_UP
      */
     private class DoubleTapGestureListener(private val rootView: View) : GestureDetector.SimpleOnGestureListener() {
