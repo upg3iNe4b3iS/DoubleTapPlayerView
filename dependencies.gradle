@@ -10,9 +10,9 @@ ext.versions = [
 
 ext.build = [
     buildTools  : '30.0.3',
-    minSdk      : 16,
-    targetSdk   : 30,
-    compileSdk  : 30,
+    minSdk      : 23,
+    targetSdk   : 34,
+    compileSdk  : 34,
 
     libMajor    : 1,
     libMinor    : 0,
