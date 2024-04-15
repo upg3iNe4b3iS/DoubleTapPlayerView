@@ -1,4 +1,4 @@
-package com.github.vkay94.dtpv;
+package com.github.vkay94.dtpv
 
 
 interface PlayerDoubleTapListener {

@@ -11,15 +11,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.widget.TextViewCompat
+import androidx.media3.common.Player
+import androidx.media3.ui.PlayerView
 import com.github.vkay94.dtpv.DoubleTapPlayerView
 import com.github.vkay94.dtpv.PlayerDoubleTapListener
 import com.github.vkay94.dtpv.R
 import com.github.vkay94.dtpv.SeekListener
 import com.github.vkay94.dtpv.youtube.views.CircleClipTapView
 import com.github.vkay94.dtpv.youtube.views.SecondsView
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.ui.PlayerView
-
 
 /**
  * Overlay for [DoubleTapPlayerView] to create a similar UI/UX experience like the official
@@ -74,26 +73,32 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
      */
     private fun initializeAttributes() {
         if (attrs != null) {
-            val a = context.obtainStyledAttributes(attrs,
-                R.styleable.YouTubeOverlay, 0, 0)
+            val a = context.obtainStyledAttributes(
+                attrs,
+                R.styleable.YouTubeOverlay, 0, 0
+            )
 
             // PlayerView => see onAttachToWindow
             playerViewRef = a.getResourceId(R.styleable.YouTubeOverlay_yt_playerView, -1)
 
             // Durations
             animationDuration = a.getInt(
-                R.styleable.YouTubeOverlay_yt_animationDuration, 650).toLong()
+                R.styleable.YouTubeOverlay_yt_animationDuration, 650
+            ).toLong()
 
             seekSeconds = a.getInt(
-                R.styleable.YouTubeOverlay_yt_seekSeconds, 10)
+                R.styleable.YouTubeOverlay_yt_seekSeconds, 10
+            )
 
             iconAnimationDuration = a.getInt(
-                R.styleable.YouTubeOverlay_yt_iconAnimationDuration, 750).toLong()
+                R.styleable.YouTubeOverlay_yt_iconAnimationDuration, 750
+            ).toLong()
 
             // Arc size
             arcSize = a.getDimensionPixelSize(
                 R.styleable.YouTubeOverlay_yt_arcSize,
-                context.resources.getDimensionPixelSize(R.dimen.dtpv_yt_arc_size)).toFloat()
+                context.resources.getDimensionPixelSize(R.dimen.dtpv_yt_arc_size)
+            ).toFloat()
 
             // Colors
             tapCircleColor = a.getColor(
@@ -109,7 +114,8 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
             // Seconds TextAppearance
             textAppearance = a.getResourceId(
                 R.styleable.YouTubeOverlay_yt_textAppearance,
-                R.style.YTOSecondsTextAppearance)
+                R.style.YTOSecondsTextAppearance
+            )
 
             // Seconds icon
             icon = a.getResourceId(
@@ -123,7 +129,8 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
             // Set defaults
             arcSize = context.resources.getDimensionPixelSize(R.dimen.dtpv_yt_arc_size).toFloat()
             tapCircleColor = ContextCompat.getColor(context, R.color.dtpv_yt_tap_circle_color)
-            circleBackgroundColor = ContextCompat.getColor(context, R.color.dtpv_yt_background_circle_color)
+            circleBackgroundColor =
+                ContextCompat.getColor(context, R.color.dtpv_yt_background_circle_color)
             animationDuration = 650
             iconAnimationDuration = 750
             seekSeconds = 10
@@ -361,6 +368,7 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
                 }
                 rewinding()
             }
+
             true -> {
 
                 // First time tap or switched
@@ -379,6 +387,7 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
                 }
                 forwarding()
             }
+
             else -> {
                 // Middle area tapped: do nothing
                 //
@@ -438,12 +447,16 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
             clone(rootLayout)
             if (forward) {
                 clear(secondsView.id, ConstraintSet.START)
-                connect(secondsView.id, ConstraintSet.END,
-                    ConstraintSet.PARENT_ID, ConstraintSet.END)
+                connect(
+                    secondsView.id, ConstraintSet.END,
+                    ConstraintSet.PARENT_ID, ConstraintSet.END
+                )
             } else {
                 clear(secondsView.id, ConstraintSet.END)
-                connect(secondsView.id, ConstraintSet.START,
-                    ConstraintSet.PARENT_ID, ConstraintSet.START)
+                connect(
+                    secondsView.id, ConstraintSet.START,
+                    ConstraintSet.PARENT_ID, ConstraintSet.START
+                )
             }
             secondsView.start()
             applyTo(rootLayout)
@@ -492,7 +505,8 @@ class YouTubeOverlay(context: Context, private val attrs: AttributeSet?) :
 
             if (player.playbackState == PlaybackState.STATE_ERROR ||
                 player.playbackState == PlaybackState.STATE_NONE ||
-                player.playbackState == PlaybackState.STATE_STOPPED) {
+                player.playbackState == PlaybackState.STATE_STOPPED
+            ) {
 
                 playerView.cancelInDoubleTapMode()
                 return null

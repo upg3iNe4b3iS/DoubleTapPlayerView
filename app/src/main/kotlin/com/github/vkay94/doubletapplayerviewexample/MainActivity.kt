@@ -8,8 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.OptIn
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.media3.common.util.UnstableApi
 import com.github.vkay94.doubletapplayerviewexample.databinding.ActivityMainBinding
 import com.github.vkay94.doubletapplayerviewexample.databinding.ExoPlaybackControlViewYtBinding
 import com.github.vkay94.doubletapplayerviewexample.fragments.PageViewModel
@@ -18,6 +20,7 @@ import com.github.vkay94.doubletapplayerviewexample.fragments.SectionsPagerAdapt
 import com.github.vkay94.doubletapplayerviewexample.fragments.ShapeFragment
 import com.github.vkay94.dtpv.youtube.YouTubeOverlay
 
+@OptIn(UnstableApi::class)
 class MainActivity : BaseVideoActivity() {
 
     private var isVideoFullscreen = false
@@ -61,6 +64,14 @@ class MainActivity : BaseVideoActivity() {
         controlsBinding.fullscreenButton.setOnClickListener {
             toggleFullscreen()
         }
+
+        controlsBinding.exoPlay.setOnClickListener {
+            player?.play()
+        }
+
+        controlsBinding.exoPause.setOnClickListener {
+            player?.play()
+        }
     }
 
     private fun initDoubleTapPlayerView() {
@@ -72,6 +83,7 @@ class MainActivity : BaseVideoActivity() {
                     binding.previewPlayerView.useController = false
                     ytOverlay.visibility = View.VISIBLE
                 }
+
                 override fun onAnimationEnd() {
                     ytOverlay.visibility = View.GONE
                     binding.previewPlayerView.useController = true
@@ -89,7 +101,8 @@ class MainActivity : BaseVideoActivity() {
             arcSize.value = DataAndUtils.pxToDp(this@MainActivity, ytOverlay.arcSize)
             circleBackgroundColor.value = ytOverlay.circleBackgroundColor
             circleExpandDuration.value = ytOverlay.animationDuration
-            fontSize.value = DataAndUtils.pxToSp(this@MainActivity, ytOverlay.secondsTextView.textSize)
+            fontSize.value =
+                DataAndUtils.pxToSp(this@MainActivity, ytOverlay.secondsTextView.textSize)
             typeFace.value = Typeface.NORMAL
             iconSpeed.value = ytOverlay.iconAnimationDuration
         }
@@ -159,11 +172,13 @@ class MainActivity : BaseVideoActivity() {
                 openInBrowser(DataAndUtils.GITHUB_LINK)
                 true
             }
+
             R.id.menu_main_action_change_video -> {
                 startNextVideo()
                 Toast.makeText(this, "Video has changed", Toast.LENGTH_SHORT).show()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
 

@@ -51,9 +51,9 @@ dependencies {
     implementation "androidx.core:core-ktx:$versions.core_ktx"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
 
-    // ExoPlayer2
-    implementation "com.google.android.exoplayer:exoplayer-core:$versions.exoplayer"
-    implementation "com.google.android.exoplayer:exoplayer-ui:$versions.exoplayer"
+    // Media3
+    implementation "androidx.media3:media3-exoplayer:$versions.exoplayer"
+    implementation "androidx.media3:media3-ui:$versions.exoplayer"
 
     implementation "com.github.StephenVinouze:MaterialNumberPicker:1.1.0"
     implementation project(path: ':doubletapplayerview')

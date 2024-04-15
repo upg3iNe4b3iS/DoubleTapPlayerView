@@ -10,7 +10,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.view.GestureDetectorCompat
-import com.google.android.exoplayer2.ui.PlayerView
+import androidx.media3.ui.PlayerView
 
 /**
  * Custom player class for Double-Tapping listening
@@ -19,7 +19,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
     context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : PlayerView(context!!, attrs, defStyleAttr) {
 
-    private val gestureDetector: GestureDetectorCompat
+    private val gestureDetector: GestureDetectorCompat?
     private val gestureListener: DoubleTapGestureListener = DoubleTapGestureListener(rootView)
 
     private var controller: PlayerDoubleTapListener? = null
@@ -32,7 +32,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
     private var controllerRef: Int = -1
 
     init {
-        gestureDetector = GestureDetectorCompat(context, gestureListener)
+        gestureDetector = context?.let { GestureDetectorCompat(it, gestureListener) }
 
         // Check whether controller is set through XML
         attrs?.let {
@@ -45,7 +45,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
 
     /**
      * If this field is set to `true` this view will handle double tapping, otherwise it will
-     * handle touches the same way as the original [PlayerView][com.google.android.exoplayer2.ui.PlayerView] does
+     * handle touches the same way as the original [PlayerView] does
      */
     var isDoubleTapEnabled = true
 
@@ -92,7 +92,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean {
         if (isDoubleTapEnabled) {
-            gestureDetector.onTouchEvent(ev)
+            gestureDetector?.onTouchEvent(ev)
 
             // Do not trigger original behavior when double tapping
             // otherwise the controller would show/hide - it would flack
@@ -107,7 +107,7 @@ open class DoubleTapPlayerView @JvmOverloads constructor(
         // If the PlayerView is set by XML then call the corresponding setter method
         if (controllerRef != -1) {
             try {
-                val view = (this.parent as View).findViewById(controllerRef) as View
+                val view: View = (this.parent as View).findViewById(controllerRef)
                 if (view is PlayerDoubleTapListener) {
                     controller(view)
                 }
