@@ -94,30 +94,30 @@ class MainActivity : BaseVideoActivity() {
             iconSpeed.value = ytOverlay.iconAnimationDuration
         }
 
-        viewModel.circleExpandDuration.observe(this, {
+        viewModel.circleExpandDuration.observe(this) {
             ytOverlay.animationDuration(it)
-        })
-        viewModel.arcSize.observe(this, {
+        }
+        viewModel.arcSize.observe(this) {
             ytOverlay.arcSize(DataAndUtils.dpToPx(this@MainActivity, it.toFloat()))
-        })
-        viewModel.fontSize.observe(this, {
+        }
+        viewModel.fontSize.observe(this) {
             TextViewStyler().textSize(it).applyTo(ytOverlay.secondsTextView)
-        })
-        viewModel.typeFace.observe(this, {
+        }
+        viewModel.typeFace.observe(this) {
             TextViewStyler().textStyle(it).applyTo(ytOverlay.secondsTextView)
-        })
-        viewModel.tapCircleColor.observe(this, {
+        }
+        viewModel.tapCircleColor.observe(this) {
             ytOverlay.tapCircleColorInt(it)
-        })
-        viewModel.circleBackgroundColor.observe(this, {
+        }
+        viewModel.circleBackgroundColor.observe(this) {
             ytOverlay.circleBackgroundColorInt(it)
-        })
-        viewModel.secondsIcon.observe(this, {
+        }
+        viewModel.secondsIcon.observe(this) {
             ytOverlay.icon(it)
-        })
-        viewModel.iconSpeed.observe(this, {
+        }
+        viewModel.iconSpeed.observe(this) {
             ytOverlay.iconAnimationDuration(it)
-        })
+        }
     }
 
     private fun startNextVideo() {
