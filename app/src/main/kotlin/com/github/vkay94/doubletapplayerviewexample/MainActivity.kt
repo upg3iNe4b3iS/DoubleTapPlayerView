@@ -70,7 +70,7 @@ class MainActivity : BaseVideoActivity() {
         }
 
         controlsBinding.exoPause.setOnClickListener {
-            player?.play()
+            player?.pause()
         }
     }
 
