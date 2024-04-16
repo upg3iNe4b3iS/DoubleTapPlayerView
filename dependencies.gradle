@@ -1,20 +1,20 @@
 ext.versions = [
-    kotlin              : '1.5.21',
-    core_ktx            : '1.6.0',
-    appcompat           : '1.3.1',
-    constraintlayout    : '2.1.0',
-    material            : '1.4.0',
-    lifecycle           : '2.3.0',
-    exoplayer           : '1.3.1'
+        kotlin          : '1.7.22',
+        core_ktx        : '1.8.0',
+        appcompat       : '1.6.1',
+        constraintlayout: '2.1.0',
+        material        : '1.11.0',
+        lifecycle       : '2.2.0',
+        exoplayer       : '1.3.1'
 ]
 
 ext.build = [
-    buildTools  : '30.0.3',
-    minSdk      : 23,
-    targetSdk   : 34,
-    compileSdk  : 34,
+        buildTools: '33.0.1',
+        minSdk    : 23,
+        targetSdk : 34,
+        compileSdk: 34,
 
-    libMajor    : 1,
-    libMinor    : 0,
-    libPatch    : 4,
+        libMajor  : 1,
+        libMinor  : 0,
+        libPatch  : 4,
 ]
